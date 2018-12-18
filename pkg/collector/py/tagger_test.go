@@ -9,14 +9,7 @@
 package py
 
 import (
-	"testing"
-
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-
-	"github.com/DataDog/datadog-agent/pkg/aggregator/mocksender"
 	"github.com/DataDog/datadog-agent/pkg/errors"
-	"github.com/DataDog/datadog-agent/pkg/tagger"
 	"github.com/DataDog/datadog-agent/pkg/tagger/collectors"
 )
 
@@ -34,30 +27,30 @@ func (c *DummyCollector) Fetch(entity string) ([]string, []string, error) {
 	}
 }
 
-func TestGetTags(t *testing.T) {
-	collectors.DefaultCatalog = map[string]collectors.CollectorFactory{
-		"dummy": func() collectors.Collector {
-			return &DummyCollector{}
-		},
-	}
-	tagger.Init()
+// func TestGetTags(t *testing.T) {
+// 	collectors.DefaultCatalog = map[string]collectors.CollectorFactory{
+// 		"dummy": func() collectors.Collector {
+// 			return &DummyCollector{}
+// 		},
+// 	}
+// 	tagger.Init()
 
-	// Make sure tagger works as expected first
-	low, err := tagger.Tag("test_entity", false)
-	require.NoError(t, err)
-	require.Equal(t, low, []string{"test_entity:low"})
-	high, err := tagger.Tag("test_entity", true)
-	require.NoError(t, err)
-	assert.ElementsMatch(t, high, []string{"test_entity:low", "test_entity:high", "other_tag:high"})
+// 	// Make sure tagger works as expected first
+// 	low, err := tagger.Tag("test_entity", false)
+// 	require.NoError(t, err)
+// 	require.Equal(t, low, []string{"test_entity:low"})
+// 	high, err := tagger.Tag("test_entity", true)
+// 	require.NoError(t, err)
+// 	assert.ElementsMatch(t, high, []string{"test_entity:low", "test_entity:high", "other_tag:high"})
 
-	check, _ := getCheckInstance("testtagger", "TestCheck")
-	mockSender := mocksender.NewMockSender(check.ID())
-	mockSender.SetupAcceptAll()
+// 	check, _ := getCheckInstance("testtagger", "TestCheck")
+// 	mockSender := mocksender.NewMockSender(check.ID())
+// 	mockSender.SetupAcceptAll()
 
-	err = check.Run()
-	require.NoError(t, err)
+// 	err = check.Run()
+// 	require.NoError(t, err)
 
-	mockSender.AssertMetricTaggedWith(t, "Gauge", "metric.low_card", []string{"test_entity:low"})
-	mockSender.AssertMetricTaggedWith(t, "Gauge", "metric.high_card", []string{"test_entity:low", "test_entity:high", "other_tag:high"})
-	mockSender.AssertMetricTaggedWith(t, "Gauge", "metric.unknown", []string{})
-}
+// 	mockSender.AssertMetricTaggedWith(t, "Gauge", "metric.low_card", []string{"test_entity:low"})
+// 	mockSender.AssertMetricTaggedWith(t, "Gauge", "metric.high_card", []string{"test_entity:low", "test_entity:high", "other_tag:high"})
+// 	mockSender.AssertMetricTaggedWith(t, "Gauge", "metric.unknown", []string{})
+// }
