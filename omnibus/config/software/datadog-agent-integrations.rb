@@ -31,10 +31,11 @@ source git: 'https://github.com/DataDog/integrations-core.git'
 PIPTOOLS_VERSION = "2.0.2"
 UNINSTALL_PIPTOOLS_DEPS = ['six', 'click', 'first', 'pip-tools']
 
-integrations_core_version = ENV['INTEGRATIONS_CORE_VERSION']
-if integrations_core_version.nil? || integrations_core_version.empty?
-  integrations_core_version = 'master'
-end
+# integrations_core_version = ENV['INTEGRATIONS_CORE_VERSION']
+# if integrations_core_version.nil? || integrations_core_version.empty?
+#   integrations_core_version = 'master'
+# end
+integrations_core_version = "remicalixte/pyodbc-python37"
 default_version integrations_core_version
 
 
