@@ -18,12 +18,12 @@
   version = "4.7.1"
 
 [[projects]]
-  branch = "master"
-  digest = "1:049715cb57c98e4a13d9b4e56739230cc8f83ad3a822053e7b74a3f1a3ba9bab"
+  branch = "remicalixte/fix-windows"
+  digest = "1:4b29dd3793a50d1a29c63645653492c6d9daf7ec8c5f462cb6be77d856ec9c83"
   name = "github.com/DataDog/go-python3"
   packages = ["."]
   pruneopts = ""
-  revision = "55b7b607adf594960e9fcf7511ce2c3710a57cfe"
+  revision = "564f03ddcd6f6023de2d1127763352267bfaa853"
 
 [[projects]]
   branch = "master"
